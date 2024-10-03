@@ -1,0 +1,35 @@
+ls – List directory contents.
+Example: ls -la (List all files including hidden ones in long format).
+
+cd – Change directory.
+Example: cd /home/user/ (Move to /home/user/ directory).
+
+pwd – Print working directory (shows the current directory path).
+
+mkdir – Create a new directory.
+Example: mkdir new_folder (Create a folder named new_folder).
+
+rm – Remove files or directories.
+Example: rm file.txt (Remove a file named file.txt), rm -r folder/ (Remove a directory recursively).
+
+cp – Copy files or directories.
+Example: cp source.txt dest.txt (Copy source.txt to dest.txt).
+
+mv – Move or rename files or directories.
+Example: mv oldname.txt newname.txt (Rename a file), mv file.txt /home/user/ (Move file.txt to another directory).
+
+touch – Create an empty file.
+Example: touch newfile.txt (Create an empty file named newfile.txt).
+
+cat – Display file contents.
+Example: cat file.txt (Display the contents of file.txt).
+
+ps – Show running processes.
+Example: ps aux (List all running processes).
+
+kill – Terminate a process by its process ID (PID).
+Example: kill 1234 (Kill the process with PID 1234).
+
+killall – Kill processes by name.
+Example: killall firefox (Kill all instances of Firefox).
+
