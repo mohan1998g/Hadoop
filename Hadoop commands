@@ -15,3 +15,13 @@ hdfs dfs -cat /path/file   # Display file content
 hdfs dfs -cp /src /dest    # Copy file from source to destination
 
 hdfs dfs -mv /src /dest    # Move file from source to destination
+
+start-dfs.sh        # Start HDFS
+
+stop-dfs.sh         # Stop HDFS
+
+hadoop dfsadmin -safemode get   # Check if HDFS is in safe mode
+
+hadoop dfsadmin -safemode leave # Leave safe mode
+
+hadoop job -history /path/to/history   # View MapReduce job history
