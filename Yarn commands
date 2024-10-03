@@ -7,3 +7,7 @@ yarn application -kill application_1234567890123_0001    # Kill a running applic
 yarn node -list                        # List all YARN nodes
 
 yarn node -status nodeID               # Get the status of a specific node
+
+start-yarn.sh       # Start YARN
+
+stop-yarn.sh        # Stop YARN
