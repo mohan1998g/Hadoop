@@ -1,0 +1,9 @@
+yarn application -list                 # List all running applications
+
+yarn application -status application_1234567890123_0001  # Check the status of an application
+
+yarn application -kill application_1234567890123_0001    # Kill a running application
+
+yarn node -list                        # List all YARN nodes
+
+yarn node -status nodeID               # Get the status of a specific node
