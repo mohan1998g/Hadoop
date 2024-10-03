@@ -1,0 +1,17 @@
+hdfs dfs -ls /             # List files in a directory
+
+hdfs dfs -mkdir /path      # Create a directory
+
+hdfs dfs -rm /path/file    # Remove a file
+
+hdfs dfs -rmdir /path      # Remove a directory
+
+hdfs dfs -put localfile /path   # Upload file from local system to HDFS
+
+hdfs dfs -get /path/file localfile   # Download file from HDFS to local system
+
+hdfs dfs -cat /path/file   # Display file content
+
+hdfs dfs -cp /src /dest    # Copy file from source to destination
+
+hdfs dfs -mv /src /dest    # Move file from source to destination
