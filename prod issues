@@ -1,0 +1,70 @@
+1. Hadoop Production Issues
+
+1.1. DataNode Failures
+
+Description: DataNodes may fail due to hardware or network issues, leading to data loss or unavailability.
+
+Possible Causes:
+
+Disk failures
+
+Network issues
+
+JVM crashes
+
+
+Solutions:
+
+Check disk health and ensure sufficient storage.
+
+Investigate network connectivity.
+
+Configure DataNode log monitoring and set up alerting.
+
+Enable DataNode automatic restart in Hadoop configuration (dfs.datanode.restart.retries).
+
+
+
+1.2. NameNode Overload
+
+Description: NameNode becomes overloaded due to excessive metadata handling or client requests, causing delays or failures in accessing HDFS.
+
+Possible Causes:
+
+Large number of small files
+
+Memory pressure
+
+Too many client requests
+
+
+Solutions:
+
+Use HDFS Federation to distribute metadata load.
+
+Tune NameNode heap size and garbage collection settings.
+
+Consolidate small files using sequence files or HAR (Hadoop Archive).
+
+Use Secondary NameNode or Checkpoints effectively.
+
+
+
+1.3. Cluster Resource Contention
+
+Description: Resource contention can lead to job failures or significant delays.
+
+Possible Causes:
+
+Multiple resource-intensive jobs running simultaneously.
+
+Insufficient CPU or memory allocation.
+
+
+Solutions:
+
+Use CapacityScheduler or FairScheduler for resource allocation.
+
+Tune job settings to limit resource usage (mapreduce.memory.mb, yarn.nodemanager.resource.memory-mb).
+
+Monitor cluster resource usage via Ambari or Cloudera Manager.
