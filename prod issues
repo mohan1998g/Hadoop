@@ -299,3 +299,72 @@ Implement regular and comprehensive backup schedules.
 Validate backup integrity periodically.
 
 Develop and document a robust disaster recovery plan.
+
+Known Issues in HDFS
+Learn about the known issues in HDFS, the impact or changes to the functionality, and the workaround.
+
+CDPD-67230: Rolling restart can cause failed writes on small clusters
+In a rolling restart, if the cluster has less than 10 datanodes existing writers can fail with an error indicating a new block cannot be allocated and all nodes are excluded. This is because the client has attempted to use all the datanodes in the cluster, and failed to write to each of them as they were restarted. This will only happen on small clusters of less than 10 datanodes, as larger clusters have more spare node to allow the write to continue.
+None.
+CDPD-60873: java.io.IOException: Got error, status=ERROR, status message, ack with firstBadLink while fixing the HDFS corrupt file during rollback.
+Increase the value of dfs.client.block.write.retries to the number of nodes in the cluster and perform Deploy client configuration procedure for rectification.
+CDPD-60431: Configuration difference between 7.1.7 SP2 and 7.1.9.0 results
+Component
+
+Configuration	Old Value	New Value	Description
+HDFS	dfs.permissions.ContentSummary.subAccess	Not set	True	Performance optimization for NN content summary API
+HDFS	dfs.datanode.handler.count	3	10	Optimal value for DN server threads on large clusters
+None
+CDPD-60387: Configuration difference between 7.1.8.3 and 7.1.9.0 results
+Component
+
+Configuration	Old Value	New Value	Description
+HDFS	dfs.namenode.accesstime.precision	Not set	0	Optimal value for NN performance on large clusters
+HDFS	dfs.datanode.handler.count	3	10	Optimal value for DN server threads on large clusters
+None
+OPSAPS-64307: When the JournalNodes on a cluster are restarted, the Add new NameNode wizard for HDFS service might fail to bootstrap the new NameNode. If there was no new fsImage created from the time JournalNodes restarted, during the restarti, the edit logs were rolled in the system.
+If the bootstrap fails during the Add new NameNode wizard, then perform the following steps:
+Delete the newly added NameNode and FailoverController
+Move the active HDFS NameNode to safe mode
+Perform the Save Namespace operation on the active HDFS NameNode
+Leave safe mode on the active HDFS NameNode
+Try to add the new NameNode again
+note
+Note that entering safe mode will disable writes to HDFS which causes a service disruption. If you cannot enter the safe mode, delete the newly added NameNode and FailoverController in the HDFS service and wait until HDFS automatically creates a new fsImage and then try adding the new NameNode again with the wizard.
+OPSAPS-64363: Deleting of additional Standby Namenode does not delete the ZKFC role and this has to be done manually.
+None
+CDPD-28390: Rolling restart of the HDFS JournalNodes may time out on Ubuntu20.
+If the restart operation times out, you can manually stop and restart the Name Node and Journal Node services one by one.
+OPSAPS-60832: When decommission of DN runs for a longer time and when decommission monitor's kerberos ticket expires, it is not auto-renewed. Decommission of DN is not completed in Cloudera Manager as decommission monitor fails to fetch the state of DN after kerberos ticket expiry.
+Decommission state of DN can be fetched using CLI command hdfs dfsadmin -report.
+OPSAPS-55788: WebHDFS is always enabled. The Enable WebHDFS checkbox does not take effect.
+None.
+OPSAPS-63299: Disable HA command for a nameservice does not work if the nameservice has more than 2 NNs defined.
+None
+OPSAPS-63301: Deleting nameservice command does not delete all the NNs belonging to the nameservice, if there are more than two NNs that are assigned to the nameservice.
+None
+Unsupported Features
+The following HDFS features are currently not supported in Cloudera Data Platform:
+ACLs for the NFS gateway (HADOOP-11004)
+Aliyun Cloud Connector (HADOOP-12756)
+Allow HDFS block replicas to be provided by an external storage system (HDFS-9806)
+Consistent standby Serving reads (HDFS-12943)
+Cost-Based RPC FairCallQueue (HDFS-14403)
+HDFS Router Based Federation (HDFS-10467)
+NameNode Federation (HDFS-1052)
+NameNode Port-based Selective Encryption (HDFS-13541)
+Non-Volatile Storage Class Memory (SCM) in HDFS Cache Directives (HDFS-13762)
+OpenStack Swift (HADOOP-8545)
+SFTP FileSystem (HADOOP-5732)
+Storage policy satisfier (HDFS-10285)
+Technical Service Bulletins
+TSB 2022-549: Possible HDFS Erasure Coded (EC) data loss when EC blocks are over-replicated
+Cloudera has detected a bug that can cause loss of data that is stored in HDFS Erasure Coded (EC) files in an unlikely scenario.
+Some EC blocks may be inadvertently deleted due to a bug in how the NameNode chooses excess or over-replicated block replicas for deletion. One possible cause of over-replication is running the HDFS balancer soon after a NameNode goes into failover mode.
+In a rare situation, the redundant blocks could be placed in such a way that one replica is in one rack, and few redundant replicas are in the same rack. Such placement causes a counting bug (HDFS-16420) to be triggered. Instead of deleting just the redundant replicas, the original replica may also be deleted.
+Usually this is not an issue, because the lost replica can be detected and reconstructed from the remaining data and parity blocks. However, if multiple blocks in an EC Block Group are affected by this counting bug within a short time, the block cannot be reconstructed anymore. For example, 4 blocks are affected out of 9 for the RS(6,3) policy.
+Another situation is recommissioning multiple nodes back into the same rack of the cluster where the current live replica exists.
+Upstream JIRA
+HDFS-16420
+Knowledge article
+For the latest update on this issue see the corresponding Knowledge article: TSB 2022-549: Possible HDFS Erasure Coded (EC) data loss when EC blocks are over-replicated
