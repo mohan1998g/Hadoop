@@ -44,3 +44,26 @@ Checkpointing
 
 1.	Checkpointing is the process of merging the FS image and edit log. 
 2.	It is generally done by Standby name node but if the cluster goes into safe mode, Active name node will do the checkpointing itself.
+
+Workflow
+
+1.	When the Hadoop is started and transactions happen, FS image is coped from the hard disk to RAM of the Active name node. 
+2.	The transactions are saved in FS image of Active Name node and the edit logs are saved in Journal node (both RAM and hard disk, both commits at the same time)
+3.	After 1 hour, the old FS image in hard disk of the Active name node is sent to Standby name node. 
+4.	Standby name node reads the Edit logs in the journal node and merges it with the FS image came from Active name node (HDD) and sends t back to the hard disk of the Active name node.
+5.	It happens in loop until the Hadoop cluster is shut down.
+
+Scenario 1
+
+A transaction happened and saved in FS image (RAM) of Active name node and edit log of Journal node, suddenly the Active name node stopped working (both heartbeat interval and stale time are over) and everyone is waiting.
+
+Now Zookeeper will declare the Active name node  as dead and calls the Standby name node to create a in_use.lock file and become the Active name node.
+
+Now Standby name node becomes Active name node. It will
+1.	Immediately go to the safe mode
+2.	Reads the edit logs from Journal node and merge with the FS image from Standby name and creates a brand-new FS image.
+3.	The new FS image is put in both hard disk and RAM of Standby name node  Active name node. 
+4.	Data nodes will be completely connected to the Standby name node  Active name node. 
+5.	Standby name node  Active name node will write the edit logs to Journal node
+
+
