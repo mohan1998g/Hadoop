@@ -31,6 +31,7 @@ Data nodes
 2.	The connection with Active name node is a complete connection. 
 3.	The connection with the Standby name node is a partial connection waiting to get connected whenever the Active name 	node crashes.
 4.	But the transaction information is sent only to the name node which contains the in_use.lock file.
+
 Zookeeper
 
 1.	Zookeeper maintains the Hadoop cluster.
