@@ -1,7 +1,3 @@
-Here’s a **well‑organized, detailed list of commonly used Hadoop (HDFS + YARN + MapReduce) commands** for practical use.
-
-***
-
 # 🔹 1. HDFS File System Commands (`hdfs dfs` / `hadoop fs`)
 
 These are the most frequently used commands.
