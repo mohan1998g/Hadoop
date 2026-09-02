@@ -5,11 +5,11 @@ These are the most frequently used commands.
 ## ✅ Basic File Operations
 
 ```bash
-hdfs dfs -ls /path
-hdfs dfs -mkdir /path
-hdfs dfs -mkdir -p /path/subdir
-hdfs dfs -put localfile /hdfs/path
-hdfs dfs -get /hdfs/file localpath
+hdfs dfs -ls /path - list the files and directories in a path
+hdfs dfs -mkdir /path - creates a new directory in the path
+hdfs dfs -mkdir -p /path/subdir - create a new directory and also parent directories if parent directory doesnot exists
+hdfs dfs -put localfile /hdfs/path - used to put local file in hdfs path
+hdfs dfs -get /hdfs/file localpath - used to get hdfs file to local path
 hdfs dfs -copyFromLocal file /hdfs/path
 hdfs dfs -copyToLocal /hdfs/file localpath
 ```
