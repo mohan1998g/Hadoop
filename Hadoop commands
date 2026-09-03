@@ -4,7 +4,9 @@ hdfs dfs -mkdir /path      # Create a directory
 
 hdfs dfs -rm /path/file    # Remove a file
 
-hdfs dfs -rmdir /path      # Remove a directory
+hdfs dfs -rmdir /path      # Remove an empty directory
+
+hdfs dfs -rm -r /path      # Removes the directory and contents recursively
 
 hdfs dfs -put localfile /path   # Upload file from local system to HDFS
 
