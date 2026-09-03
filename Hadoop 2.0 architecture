@@ -29,13 +29,12 @@ Data nodes
 
 1.	You will be connected with both Active name node and Standby name node
 2.	The connection with Active name node is a complete connection. 
-3.	The connection with the Standby name node is a partial connection waiting to get connected whenever the Active name 	node crashes.
+3.	The connection with the Standby name node is a partial connection waiting to get connected whenever the Active name node crashes.
 4.	But the transaction information is sent only to the name node which contains the in_use.lock file.
 
 Zookeeper
 
 1.	Zookeeper maintains the Hadoop cluster.
-2.	The name is given because Doug Cutting thought of the Hadoop cluster as Zoo and the nodes as animals
 
 Journal node
 
@@ -48,10 +47,10 @@ Checkpointing
 
 Workflow
 
-1.	When the Hadoop is started and transactions happen, FS image is coped from the hard disk to RAM of the Active name node. 
+1.	When the Hadoop is started and transactions happen, FSimage is copied from the hard disk to RAM of the Active name node. 
 2.	The transactions are saved in FS image of Active Name node and the edit logs are saved in Journal node (both RAM and hard disk, both commits at the same time)
 3.	After 1 hour, the old FS image in hard disk of the Active name node is sent to Standby name node. 
-4.	Standby name node reads the Edit logs in the journal node and merges it with the FS image came from Active name node (HDD) and sends t back to the hard disk of the Active name node.
+4.	Standby name node reads the Edit logs in the journal node and merges it with the FS image came from Active name node (HDD) and sends it back to the hard disk of the Active name node.
 5.	It happens in loop until the Hadoop cluster is shut down.
 
 Scenario 1
