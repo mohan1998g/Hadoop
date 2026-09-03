@@ -17,12 +17,12 @@ hdfs dfs -copyToLocal /hdfs/file localpath
 ## ✅ View & Read Files
 
 ```bash
-| Command          | Purpose             | What it displays                                                |
-| ---------------- | ------------------- | --------------------------------------------------------------- |
-| `hdfs dfs -cat`  | Display entire file | **Complete file**                                               |
-| `hdfs dfs -head` | Display beginning   | **First part of file**                                          |
-| `hdfs dfs -tail` | Display ending      | **Last part of file**                                           |
-| `hdfs dfs -text` | Display as text     | Converts certain compressed/binary formats to **readable text** |
+| Command          | Purpose             | What it displays                                              |
+| ---------------- | ------------------- | ------------------------------------------------------------- |
+| `hdfs dfs -cat`  | Display entire file | Complete file                                                 |
+| `hdfs dfs -head` | Display beginning   | First part of file                                            |
+| `hdfs dfs -tail` | Display ending      | Last part of file                                             |
+| `hdfs dfs -text` | Display as text     | Converts certain compressed/binary formats to **readable text |
 
 ```
 
